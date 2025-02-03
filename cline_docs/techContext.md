@@ -1,42 +1,59 @@
-# Technology Context
+# Technical Context
 
-## Stack
-- Next.js 13+ with App Router
-- TypeScript for type safety
-- Tailwind CSS for styling
-- ESLint and Prettier for code quality
-- OpenRouter API with meta-llama/llama-3.2-3b-instruct model
-- OpenAI SDK for API integration
+## Technology Stack
+- Next.js (App Router)
+- TypeScript
+- Tailwind CSS
+- OpenRouter API with Llama 3.2 3B Instruct model
 
-## Tools and Configurations
-- postcss.config.mjs for styling
-- tsconfig.json for TypeScript configuration
-- next.config.mjs for Next.js configuration
-- .env.local for environment variables
-- components.json for UI configuration
-- tailwind.config.js for styling customization
+## Development Setup
+- Node.js environment
+- Environment variables for API keys
+- Local development server
 
-## Development Environment
-- macOS Sonoma
-- VSCode as primary IDE
-- Node.js runtime
-- npm package manager
+## Technical Constraints
+- API response formatting requirements
+- Text processing performance considerations
+- Frontend rendering limitations
 
-## API Integration
-- OpenRouter API endpoint: https://openrouter.ai/api/v1
-- API key configured in .env.local
-- Server-side API route for secure communication
-- Rate limiting and error handling implementation
+## Implementation Details
+
+### Chat Service
+- OpenAI/OpenRouter integration
+- System prompt management
+- Response processing pipeline
+- Error handling
+
+### Text Formatting System
+1. Response Processing
+   - Regex-based markdown removal
+   - Spacing normalization
+   - List formatting standardization
+   - Punctuation spacing fixes
+
+2. Frontend Rendering
+   - CSS whitespace handling
+   - Text wrapping control
+   - Responsive design considerations
+
+### Component Architecture
+- AstroseerChat: Main chat interface
+- Message display system
+- Input handling
+- Loading states
+
+## Performance Considerations
+- Response processing overhead
+- Text rendering optimization
+- State management efficiency
 
 ## Security Measures
-- Environment variables for sensitive data
-- Server-side API route protection
-- Input validation and sanitization
-- Secure error handling and logging
+- API key protection
+- Input sanitization
+- Error boundary implementation
 
-## Performance Optimization
-- Server components by default
-- Client components where necessary
-- Font optimization with local files
-- Tailwind for efficient styling
-- Response caching strategies
+## Maintenance Requirements
+- Regular monitoring of text formatting
+- Performance optimization
+- User feedback integration
+- API response quality checks

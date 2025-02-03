@@ -4,13 +4,8 @@ import { useState, useEffect, useRef } from "react"
 import { Moon, Stars, Send, Sparkles } from "lucide-react"
 import { ChatMessage } from "@/lib/chatService"
 
-interface Message {
-  content: string
-  role: "user" | "assistant"
-}
-
 export default function AstroseerChat() {
-  const [messages, setMessages] = useState<Message[]>([])
+  const [messages, setMessages] = useState<ChatMessage[]>([])
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -20,7 +15,7 @@ export default function AstroseerChat() {
   const handleSend = async () => {
     if (input.trim() && !isLoading) {
       setError(null)
-      const userMessage: Message = { content: input.trim(), role: "user" }
+      const userMessage: ChatMessage = { content: input.trim(), role: "user" }
       setMessages(prev => [...prev, userMessage])
       setInput("")
       setIsLoading(true)
@@ -110,7 +105,7 @@ export default function AstroseerChat() {
                   message.role === "user"
                     ? "bg-purple-700 bg-opacity-30 text-white"
                     : "bg-indigo-700 bg-opacity-30 text-white"
-                } backdrop-blur-sm animate-fade-in-subtle max-w-[80%]`}
+                } backdrop-blur-sm animate-fade-in-subtle max-w-[80%] whitespace-pre-wrap break-words`}
               >
                 {message.content}
               </span>

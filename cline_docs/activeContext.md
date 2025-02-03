@@ -1,29 +1,21 @@
 # Active Context
 
-## Current Focus
-- Chat functionality implementation
-- API integration with OpenRouter
-- Component development and testing
+## Current Task
+Implementing proper text formatting for chat responses to ensure human-readable output without markdown artifacts.
 
 ## Recent Changes
-- Implemented chat service with OpenRouter API integration
-- Set up API route for secure chat communication
-- Created AstroseerChat component with TypeScript
-- Integrated custom Geist fonts and cosmic theme
-- Configured OpenRouter API key in .env.local
+1. Enhanced SYSTEM_PROMPT in constants.ts with explicit formatting instructions
+2. Added formatResponse function in chatService.ts to process and clean responses
+3. Updated AstroseerChat.tsx component with proper text formatting CSS
+
+## Technical Details
+- Added whitespace handling (whitespace-pre-wrap) in frontend
+- Implemented text break handling (break-words)
+- Created comprehensive markdown removal in formatResponse
+- Added spacing normalization for punctuation
+- Standardized list formatting
 
 ## Next Steps
-1. Implement testing infrastructure (Jest + React Testing Library)
-2. Add error boundaries and comprehensive error handling
-3. Set up message persistence
-4. Optimize chat component performance
-5. Enhance animations and transitions
-6. Add more interactive chat features
-
-## Current Status
-- Chat service implementation in progress
-- Core chat component exists and needs testing
-- API route configured for OpenRouter integration
-- Basic styling and responsiveness implemented
-- Custom fonts and theme integrated
-- Security measures in place for API key protection
+1. Monitor response formatting in production
+2. Gather user feedback on readability
+3. Fine-tune formatting rules if needed

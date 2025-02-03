@@ -18,7 +18,7 @@ export async function POST(request: Request) {
       (msg) =>
         msg &&
         typeof msg === 'object' &&
-        (msg.role === 'user' || msg.role === 'assistant') &&
+        (msg.role === 'user' || msg.role === 'assistant' || msg.role === 'system') &&
         typeof msg.content === 'string'
     );
 

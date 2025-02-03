@@ -1,69 +1,61 @@
-# Project Purpose
+# Product Context
 
-## Primary Goal
-Astroseer is an AI-powered chatbot that emulates consultation with a traditional classical astrologer, providing:
-- Personalized astrological insights and guidance
-- Answers to user questions using classical astrological principles
-- Authentic mystical and mysterious tone mirroring traditional astrologer consultations
+## Project Purpose
+AstroSeer is an AI-powered chat application that provides astrological insights and guidance through a mystical, cosmic-themed interface.
 
-## Target Audience & Problems Solved
-### Target Users
-- People interested in traditional astrology
-- Individuals seeking personalized astrological guidance
-- Users wanting to explore classical astrological interpretations
-- Those who find traditional astrologers inaccessible or intimidating
+## Core Problems Solved
+1. Accessibility of astrological guidance
+2. User-friendly cosmic wisdom delivery
+3. Consistent and readable response formatting
+4. Engaging user experience
 
-### Key Problems Solved
-1. Accessibility
-   - 24/7 access to astrological insights
-   - No appointment scheduling needed
-   - Immediate guidance available
+## Target Users
+- People seeking astrological insights
+- Those interested in cosmic wisdom
+- Users of varying technical backgrounds
 
-2. Cost-Effectiveness
-   - Alternative to expensive personal consultations
-   - Accessible pricing model
-   - Unlimited consultations
+## Key Features
 
-3. Privacy
-   - Private, judgment-free environment
-   - Confidential question-asking
-   - Personal space for exploration
+### Mystical Chat Interface
+- Cosmic-themed design
+- Responsive and intuitive
+- Smooth animations
+- Accessibility considerations
 
-4. Education
-   - Interactive learning about classical astrology
-   - Understanding through conversation
-   - Exposure to traditional principles
+### AI Response System
+- Llama 3.2 3B Instruct model integration
+- Consistent formatting for readability
+- Plain text responses without markdown
+- Clear and structured output
 
-## Differentiation
-Astroseer stands out through:
-1. Classical Focus
-   - Emphasis on traditional astrology
-   - Adherence to classical principles
-   - Historical authenticity
+### User Experience
+- Simple input mechanism
+- Clear message threading
+- Loading state indicators
+- Error handling
 
-2. User Experience
-   - Mysterious and authentic tone
-   - Immersive consultation experience
-   - Interactive conversation format
+## Success Metrics
+1. User engagement
+2. Response readability
+3. User satisfaction
+4. Technical performance
 
-3. Technology Integration
-   - AI-powered responses
-   - Consistent astrological interpretation
-   - Blend of ancient wisdom with modern tech
+## Product Requirements
 
-## Functional Requirements
-### Core Features
-1. Chat Interface (AstroseerChat.tsx)
-   - Interactive conversation
-   - Classical astrology responses
-   - Mystical user experience
+### Functional
+- Real-time chat functionality
+- Consistent response formatting
+- Error handling
+- Loading states
 
-2. Visual Design
-   - Custom Geist fonts
-   - Cosmic theme implementation
-   - Responsive layout
+### Non-Functional
+- Response time < 3 seconds
+- 99.9% uptime
+- Clean, readable text output
+- Responsive design
 
-3. Technical Foundation
-   - Utility functions (lib/utils.ts)
-   - Type safety
-   - Performance optimization
+## Future Considerations
+1. Enhanced formatting options
+2. Additional chat features
+3. User customization options
+4. Performance optimizations

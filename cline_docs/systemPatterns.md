@@ -1,85 +1,59 @@
 # System Patterns
 
-## Architecture Overview
-- Next.js 13+ App Router architecture
-- Server and client components separation
-- Component-based structure with TypeScript
-- OpenRouter API integration via server-side routes
+## Text Formatting System
 
-## Directory Structure
-```
-/app                    # Next.js 13 app directory
-  /api                 # API routes
-    /chat             # Chat endpoint
-  /components         # Reusable UI components
-  /fonts             # Custom font files (Geist)
-  globals.css        # Global styles
-  layout.tsx         # Root layout
-  page.tsx           # Home page
-/lib                   # Utility functions and services
-  chatService.ts     # Chat service implementation
-  utils.ts           # Shared utilities
-/cline_docs            # Project documentation
-```
+### Response Processing Pipeline
+1. LLM Generation
+   - Raw response from Llama model
+   - May contain markdown or inconsistent formatting
 
-## Key Technical Decisions
-1. **App Router**
-   - Using Next.js 13+ App Router for modern React patterns
-   - Server-first approach with client components where needed
-   - Built-in routing and layouts
+2. Text Cleaning (formatResponse function)
+   - Removes markdown syntax
+   - Normalizes spacing and line breaks
+   - Standardizes list formatting
+   - Ensures proper punctuation spacing
 
-2. **API Integration**
-   - OpenRouter API with meta-llama model
-   - Server-side routes for security
-   - Environment variables for configuration
-   - Error handling and retries
+3. Frontend Rendering
+   - Uses whitespace-pre-wrap for proper spacing
+   - Implements break-words for text wrapping
+   - Maintains styling consistency
 
-3. **Styling**
-   - Tailwind CSS for utility-first styling
-   - Custom font implementation (Geist)
-   - PostCSS for processing
-   - Cosmic theme implementation
+### Formatting Rules
+1. Plain Text Only
+   - No markdown syntax allowed
+   - Simple punctuation for emphasis
+   - Standard quotation marks
 
-4. **Type Safety**
-   - TypeScript for type safety
-   - ESLint for code quality
-   - Strict mode enabled
-   - Custom type definitions
+2. List Formatting
+   - Simple dashes (-) for unordered lists
+   - Numbers (1., 2., etc.) for ordered lists
+   - Space indentation for hierarchy
 
-5. **Component Architecture**
-   - AstroseerChat as main chat interface
-   - Chat service in lib/chatService.ts
-   - Utility functions centralized
-   - Shared components in app/components
+3. Spacing Standards
+   - Single line breaks between paragraphs
+   - Proper spacing after punctuation
+   - Consistent indentation for structured content
+
+## Implementation Details
+
+### System Prompt
+- Contains explicit formatting instructions
+- Guides LLM response structure
+- Ensures consistency across responses
+
+### Response Processing
+- Implemented in chatService.ts
+- Uses regex for pattern matching
+- Maintains content while removing formatting artifacts
+
+### Frontend Display
+- CSS classes handle text presentation
+- Preserves whitespace and line breaks
+- Ensures proper text wrapping
 
 ## Best Practices
-1. **Code Organization**
-   - Server vs Client components clearly separated
-   - API routes for external services
-   - Utility functions in dedicated lib directory
-   - Component-first architecture
-
-2. **Type Safety**
-   - TypeScript strict mode
-   - Props interfaces for all components
-   - API type definitions
-   - Utility types where appropriate
-
-3. **Styling**
-   - Tailwind classes for responsive design
-   - Custom utilities extended via tailwind.config
-   - Global styles minimized
-   - Theme consistency
-
-4. **Security**
-   - API keys in environment variables
-   - Server-side API routes
-   - Input validation
-   - Error handling
-
-5. **Performance**
-   - Server components by default
-   - Client components only when necessary
-   - Font optimization
-   - Response caching
-   - Error recovery strategies
+1. Always process responses before display
+2. Maintain consistent spacing rules
+3. Use simple, readable formatting
+4. Preserve content structure while removing markup
+5. Ensure accessibility in text presentation
