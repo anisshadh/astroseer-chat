@@ -1,0 +1,2 @@
+We are using meta-llama/llama-3.2-3b-instruct model for this project. It is powered with openrouter api with open ai integration
+The api key can be found in the .env.local file.

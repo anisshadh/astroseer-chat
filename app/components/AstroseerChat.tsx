@@ -2,38 +2,56 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Moon, Stars, Send, Sparkles } from "lucide-react"
+import { ChatMessage } from "@/lib/chatService"
 
 interface Message {
-  text: string
-  sender: "user" | "astroseer"
+  content: string
+  role: "user" | "assistant"
 }
 
 export default function AstroseerChat() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (input.trim() && !isLoading) {
-      setMessages([...messages, { text: input, sender: "user" }])
+      setError(null)
+      const userMessage: Message = { content: input.trim(), role: "user" }
+      setMessages(prev => [...prev, userMessage])
       setInput("")
       setIsLoading(true)
 
-      // Simulate a response from Astroseer
-      setTimeout(() => {
-        const responses = [
-          "The celestial bodies whisper secrets of your path...",
-          "Cosmic energies align, revealing hidden truths...",
-          "The stars have heard your query, and they respond...",
-          "Ancient wisdom emerges from the cosmic void...",
-          "The universe unfolds a tapestry of possibilities...",
-        ]
-        const response = responses[Math.floor(Math.random() * responses.length)]
-        setMessages((prev) => [...prev, { text: response, sender: "astroseer" }])
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            messages: [...messages, userMessage],
+          }),
+        })
+
+        const data = await response.json()
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to get response')
+        }
+
+        setMessages(prev => [
+          ...prev,
+          { content: data.message, role: "assistant" }
+        ])
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to get response')
+        console.error('Chat error:', err)
+      } finally {
         setIsLoading(false)
-      }, 1500)
+      }
     }
   }
 
@@ -54,11 +72,9 @@ export default function AstroseerChat() {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-    // Focus input after messages change
     inputRef.current?.focus()
   }, [messages])
 
-  // Focus input on component mount
   useEffect(() => {
     inputRef.current?.focus()
   }, [])
@@ -85,25 +101,32 @@ export default function AstroseerChat() {
           {messages.map((message, index) => (
             <div 
               key={index} 
-              className={`mb-4 ${message.sender === "user" ? "text-right" : "text-left"}`}
+              className={`mb-4 ${message.role === "user" ? "text-right" : "text-left"}`}
               role="article"
-              aria-label={`${message.sender} message`}
+              aria-label={`${message.role} message`}
             >
               <span
                 className={`inline-block p-3 rounded-lg ${
-                  message.sender === "user"
+                  message.role === "user"
                     ? "bg-purple-700 bg-opacity-30 text-white"
                     : "bg-indigo-700 bg-opacity-30 text-white"
                 } backdrop-blur-sm animate-fade-in-subtle max-w-[80%]`}
               >
-                {message.text}
+                {message.content}
               </span>
             </div>
           ))}
           {isLoading && (
-            <div className="text-left mb-4" role="status" aria-label="Astroseer is typing">
+            <div className="text-left mb-4" role="status" aria-label="Astroseer is thinking">
               <span className="inline-block p-3 rounded-lg bg-indigo-700 bg-opacity-30 text-white backdrop-blur-sm animate-pulse-subtle">
                 ✨ Consulting the stars...
+              </span>
+            </div>
+          )}
+          {error && (
+            <div className="text-center mb-4">
+              <span className="inline-block p-3 rounded-lg bg-red-700 bg-opacity-30 text-white backdrop-blur-sm">
+                🌠 {error}
               </span>
             </div>
           )}
